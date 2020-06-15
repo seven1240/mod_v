@@ -31,6 +31,7 @@ struct C.switch_stream_handle_t {
 pub fn stream_write_function(stream &C.switch_stream_handle_t, s string)
 {
 	println(s)
+//	stream.write_function(stream, s.str)
 //	tmp := stream.write_function
 //	tmp(stream, s.str)
 }

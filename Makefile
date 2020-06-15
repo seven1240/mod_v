@@ -2,6 +2,7 @@ all:
 	v -g -shared -o mod_v_ .
 
 install:
+	mv mod_v_.dylib mod_v_.so
 	cp mod_v_.so /usr/local/freeswitch/mod/
 
 # the C way

@@ -22,7 +22,7 @@ SWITCH_MODULE_DEFINITION(mod_v, mod_v_load, mod_v_shutdown, NULL);
 /* Macro expands to: switch_status_t mod_v_load(switch_loadable_module_interface_t **module_interface, switch_memory_pool_t *pool) */
 SWITCH_MODULE_LOAD_FUNCTION(mod_v_load)
 {
-	init(); // v init
+	_vinit(); // v init
 
 	*module_interface = switch_loadable_module_create_module_interface(pool, modname);
 
