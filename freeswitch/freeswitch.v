@@ -22,6 +22,7 @@ pub fn create_module_interface(pool voidptr, name string) voidptr
 
 struct C.switch_loadable_module_function_table_t {}
 
+[typedef]
 struct C.switch_stream_handle_t {
 	read_function &C.switch_stream_handle_read_function_t
 	write_function &C.switch_stream_handle_write_function_t
@@ -30,9 +31,11 @@ struct C.switch_stream_handle_t {
 pub fn stream_write_function(stream &C.switch_stream_handle_t, s string)
 {
 	println(s)
-	// stream.write_function(stream, s.str)
+//	tmp := stream.write_function
+//	tmp(stream, s.str)
 }
 
+[typedef]
 struct C.switch_api_interface_t {
 mut:
 	interface_name byteptr
@@ -80,6 +83,7 @@ pub fn add_app(module_interface voidptr, pool voidptr, func voidptr) {
 	app_int.syntax = "".str
 }
 
+[typedef]
 struct C.switch_frame_t {
 	codec voidptr
 	source byteptr
@@ -108,9 +112,9 @@ fn C.switch_core_session_read_frame()
 pub fn switch_core_session_read_frame(session voidptr) int {
 	read_frame := &C.switch_frame_t{}
 
-	switch_core_session_read_frame(session, &read_frame, C.SWITCH_IO_FLAG_SINGLE_READ, 0)
+	C.switch_core_session_read_frame(session, &read_frame, C.SWITCH_IO_FLAG_SINGLE_READ, 0)
 
-	// len := read_frame.datalen
-	// println(len.str())
+	len := read_frame.datalen
+	println(len.str())
 	return 1
 }

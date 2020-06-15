@@ -10,9 +10,10 @@ struct FreeswitchFunctionTable {
 	flags int
 }
 
-pub fn mod_v_loadx(module_interface mut &voidptr, pool voidptr) {
-
-	*module_interface = freeswitch.create_module_interface(pool, "mod_v")
+pub fn mod_v_loadx(mut module_interface &voidptr, pool voidptr) {
+	unsafe {
+		*module_interface = freeswitch.create_module_interface(pool, "mod_v")
+	}
 }
 
 const (
@@ -35,13 +36,16 @@ fn app_function(session voidptr, data byteptr)
 	mut i := 0
 	for i < 100 {
 		status := freeswitch.switch_core_session_read_frame(session)
+		println(status)
 		println(i)
 		i++
 	}
 }
 
-pub fn load(module_interface mut &voidptr, pool voidptr) int {
-	*module_interface = freeswitch.create_module_interface(pool, "mod_v_")
+pub fn load(mut module_interface &voidptr, pool voidptr) int {
+	unsafe {
+		*module_interface = freeswitch.create_module_interface(pool, "mod_v_")
+	}
 
 	freeswitch.add_api(*module_interface, pool, api_function)
 	freeswitch.add_app(*module_interface, pool, app_function)
