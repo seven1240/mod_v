@@ -24,7 +24,7 @@ fn api_function(cmd byteptr, session voidptr, stream voidptr) int
 {
 	println("api")
 	println(cmd)
-	freeswitch.stream_write_function(stream, "+OK api in V")
+	freeswitch.stream_write_function(stream, "+OK api in V\n")
 
 	return 0
 }

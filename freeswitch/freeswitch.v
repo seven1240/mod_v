@@ -22,16 +22,23 @@ pub fn create_module_interface(pool voidptr, name string) voidptr
 
 struct C.switch_loadable_module_function_table_t {}
 
+type FNStreamHandler fn(stream voidptr, s byteptr)
+
 [typedef]
 struct C.switch_stream_handle_t {
 	read_function &C.switch_stream_handle_read_function_t
-	write_function &C.switch_stream_handle_write_function_t
+	write_function FNStreamHandler
 }
+
+//struct C.switch_stream_handle_t {
+//	read_function &C.switch_stream_handle_read_function_t
+//	write_function &C.switch_stream_handle_write_function_t
+//}
 
 pub fn stream_write_function(stream &C.switch_stream_handle_t, s string)
 {
-	println(s)
-//	stream.write_function(stream, s.str)
+//	print(s)
+	stream.write_function(stream, s.str)
 //	tmp := stream.write_function
 //	tmp(stream, s.str)
 }
